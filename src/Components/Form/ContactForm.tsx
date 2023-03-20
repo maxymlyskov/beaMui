@@ -145,7 +145,7 @@ export default function ContactForm() {
           <FormGroup 
             row 
             sx={{
-              padding: 2,
+              padding: 1,
               justifyContent: 'space-between'
             }}
           >
