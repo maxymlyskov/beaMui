@@ -56,19 +56,45 @@ export default function NavDrawer() {
   return (
     <>
       <BrowserRouter>
-        
-         <AppBar>
-          <Toolbar>
-            <Typography variant='h6'> Basic Typography text </Typography>
-          </Toolbar>
-         </AppBar>
-         <Drawer variant='temporary' open={true}>
-            <List>
-              {[{text:"Firsts"},{text:"second"}].map(item=>
-                 <ListItem key={item.text}>{item.text}</ListItem>)
-              }
-            </List>
-         </Drawer>
+        <div>
+          <AppBar position="fixed" sx={styles(theme).appBar}>
+            <Toolbar>
+              <Typography variant="h6" noWrap>
+                Expert Material-UI Styling
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            variant="temporary"
+            open={true}
+            
+          >
+            <Toolbar />
+            <div>
+              <List>
+                {[{ text: "Contact Form", route: '/form' }, { text: "Card Grid", route: "/grid" }, { text: "Table", route: "/table" }, { text: "Data Grid", route: "/datagrid" }].map((nav, index) => (
+                  <ListItem key={nav.text} sx={{ borderBottom: '1px solid black', borderBottomColor: 'primary.main' }}>
+                    <Link to={nav.route}>{nav.text}</Link>
+                  </ListItem>
+                ))}
+              </List>
+            </div>
+          </Drawer>
+          <main
+            style={{ ...styles(theme).content, ...styles(theme).contentShift }}
+          >
+            <Toolbar />
+            <ThemeProvider theme={BeautifulTheme}>
+              <Routes>
+                <Route path={"/"} element={<ContactForm />} />
+                <Route path={"/form"} element={<ContactForm />} />
+                <Route path={"/grid"} element={<ContactCardGrid />} />
+                <Route path={"/table"} element={<ContactTable />} />
+                <Route path={"/datagrid"} element={<ContactDataGrid />} />
+              </Routes>
+            </ThemeProvider>
+          </main>
+        </div>
       </BrowserRouter>
     </>
   );
