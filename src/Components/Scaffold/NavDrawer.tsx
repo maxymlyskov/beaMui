@@ -65,9 +65,16 @@ export default function NavDrawer() {
             </Toolbar>
           </AppBar>
           <Drawer
+            disableEnforceFocus
+            sx={styles(theme).drawer}
             variant="temporary"
             open={true}
-            
+            transitionDuration={{
+              enter: transitionDuration,
+              exit: transitionDuration
+            }}
+
+            PaperProps={{ elevation: 9, sx: styles(theme).drawerPaper }}
           >
             <Toolbar />
             <div>
