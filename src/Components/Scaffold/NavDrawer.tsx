@@ -56,52 +56,19 @@ export default function NavDrawer() {
   return (
     <>
       <BrowserRouter>
-        <div>
-          <AppBar position="fixed" sx={styles(theme).appBar}>
-            <Toolbar>
-              <Typography variant="h6" noWrap>
-                Expert Material-UI Styling
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          <Drawer
-            disableEnforceFocus
-            sx={styles(theme).drawer}
-            variant="temporary"
-            open={true}
-            transitionDuration={{
-              enter: transitionDuration,
-              exit: transitionDuration
-            }}
-
-            PaperProps={{ elevation: 9, sx: styles(theme).drawerPaper }}
-          >
-            <Toolbar />
-            <div>
-              <List>
-                {[{ text: "Contact Form", route: '/form' }, { text: "Card Grid", route: "/grid" }, { text: "Table", route: "/table" }, { text: "Data Grid", route: "/datagrid" }].map((nav, index) => (
-                  <ListItem key={nav.text} sx={{ borderBottom: '1px solid black', borderBottomColor: 'primary.main' }}>
-                    <Link to={nav.route}>{nav.text}</Link>
-                  </ListItem>
-                ))}
-              </List>
-            </div>
-          </Drawer>
-          <main
-            style={{ ...styles(theme).content, ...styles(theme).contentShift }}
-          >
-            <Toolbar />
-            <ThemeProvider theme={BeautifulTheme}>
-              <Routes>
-                <Route path={"/"} element={<ContactForm />} />
-                <Route path={"/form"} element={<ContactForm />} />
-                <Route path={"/grid"} element={<ContactCardGrid />} />
-                <Route path={"/table"} element={<ContactTable />} />
-                <Route path={"/datagrid"} element={<ContactDataGrid />} />
-              </Routes>
-            </ThemeProvider>
-          </main>
-        </div>
+        
+         <AppBar>
+          <Toolbar>
+            <Typography variant='h6'> Basic Typography text </Typography>
+          </Toolbar>
+         </AppBar>
+         <Drawer variant='temporary' open={true}>
+            <List>
+              {[{text:"Firsts"},{text:"second"}].map(item=>
+                 <ListItem key={item.text}>{item.text}</ListItem>)
+              }
+            </List>
+         </Drawer>
       </BrowserRouter>
     </>
   );
