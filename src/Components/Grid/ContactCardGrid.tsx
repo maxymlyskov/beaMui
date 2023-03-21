@@ -20,7 +20,7 @@ export default function ContactCardGrid() {
                 title={contact.name}
                 subheader={contact.role}
                 avatar={
-                  <Avatar >{contact.name?.substring(0, 1).toUpperCase() || "A"}</Avatar>
+                  <Avatar >{contact.name?.substring(0, 1).toUpperCase() || "M"}</Avatar>
                 }
               />
               <CardContent>
