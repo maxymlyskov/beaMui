@@ -162,6 +162,7 @@ export default function ContactForm() {
         </FormControl>
       </form>
     </Paper>
+    {/* Alert */}
     <Dialog open={alertOpen} onClose={handleAlertClick}>
       <Alert
         onClose={() => setAlertOpen(false)}
