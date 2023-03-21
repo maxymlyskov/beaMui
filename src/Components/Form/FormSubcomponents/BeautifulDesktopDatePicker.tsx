@@ -10,7 +10,7 @@ export default function BeautifulDesktopDatePicker(props: any) {
       <DesktopDatePicker
         {...props}
         label="Date"
-        inputFormat="MM/DD/YYYY" //depends on date lib
+        inputFormat="MM/DD/YYYY" 
         renderInput={(params) => {
           return <TextField {...params} sx={{ minWidth: minWidth }} />;
         }}
