@@ -21,7 +21,7 @@ export default function BeautifulAutocomplete(props: any) {
           <li {...props}>
             {`${option}`}
           </li>
-        ); //display value
+        ); 
       }}
     />
   )
