@@ -36,7 +36,7 @@ const styles = (theme: ThemeWidth) => {
     },
     drawerPaper: {
       width: drawerWidth,
-      backgroundColor: "rgba(120, 120, 120, 0.2)"
+      backgroundColor: "rgba(120, 120, 120, 0.25)"
     },
     content: {
       padding: 3,
