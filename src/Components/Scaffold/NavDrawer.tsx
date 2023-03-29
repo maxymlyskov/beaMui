@@ -4,6 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import ListItem from "@mui/material/ListItem";
+import {useState, useEffect} from 'react'
 import { useTheme, Theme, ThemeProvider } from '@mui/material/styles';
 import {
   BrowserRouter,
@@ -16,6 +17,7 @@ import ContactForm from "../Form/ContactForm";
 import ContactTable from "../Table/ContactTable";
 import ContactDataGrid from "../DataGrid/ContactDataGrid";
 import { BeautifulTheme } from "../../Theme/BeautifulTheme";
+import { useMediaQuery } from "@mui/material";
 
 type ThemeWidth = Theme
   & { drawerWidth: number | string }
@@ -23,29 +25,29 @@ type ThemeWidth = Theme
 const drawerWidth = 240;
 const transitionDuration = 1000;
 
-const styles = (theme: ThemeWidth) => {
+const styles = (theme: ThemeWidth, responsiveDrawerWidth: number | string) => {
   return {
     appBar: {
       zIndex: theme.zIndex.drawer + 1
     },
     drawer: {
-      width: drawerWidth,
+      width: responsiveDrawerWidth,
       "& .MuiBackdrop-root": {
         display: "none"
       }
     },
     drawerPaper: {
-      width: drawerWidth,
+      width: responsiveDrawerWidth,
       backgroundColor: "rgba(120, 120, 120, 0.25)"
     },
     content: {
       padding: 3,
-      minWidth: drawerWidth,
+      minWidth: responsiveDrawerWidth,
       marginLeft: 0
     },
     contentShift: {
-      minWidth: drawerWidth,
-      marginLeft: drawerWidth
+      minWidth: responsiveDrawerWidth,
+      marginLeft: responsiveDrawerWidth
     }
   }
 }
@@ -53,11 +55,19 @@ const styles = (theme: ThemeWidth) => {
 export default function NavDrawer() {
   const theme = useTheme() as ThemeWidth;
   theme.drawerWidth = drawerWidth
+  const greatedThan375 = useMediaQuery("(min-width: 376px");
+  const [open, setOpen] = useState(greatedThan375)
+  const responsiveDrawerWidth = greatedThan375 ? drawerWidth: '100%'
+
+  useEffect(()=>{
+    setOpen(greatedThan375)
+  },[greatedThan375])
+
   return (
     <>
       <BrowserRouter>
         <div>
-          <AppBar position="fixed" sx={styles(theme).appBar}>
+          <AppBar position="fixed" sx={styles(theme,responsiveDrawerWidth).appBar}>
             <Toolbar>
               <Typography variant="h6" noWrap>
                 Expert Material-UI Styling
@@ -66,15 +76,15 @@ export default function NavDrawer() {
           </AppBar>
           <Drawer
             disableEnforceFocus
-            sx={styles(theme).drawer}
+            sx={styles(theme,responsiveDrawerWidth).drawer}
             variant="temporary"
-            open={true}
+            open={open}
             transitionDuration={{
               enter: transitionDuration,
               exit: transitionDuration
             }}
 
-            PaperProps={{ elevation: 9, sx: styles(theme).drawerPaper }}
+            PaperProps={{ elevation: 9, sx: styles(theme,responsiveDrawerWidth).drawerPaper }}
           >
             <Toolbar />
             <div>
@@ -88,7 +98,7 @@ export default function NavDrawer() {
             </div>
           </Drawer>
           <main
-            style={{ ...styles(theme).content, ...styles(theme).contentShift }}
+            style={{ ...styles(theme,responsiveDrawerWidth).content, ...styles(theme,responsiveDrawerWidth).contentShift }}
           >
             <Toolbar />
             <ThemeProvider theme={BeautifulTheme}>
