@@ -17,7 +17,8 @@ import ContactForm from "../Form/ContactForm";
 import ContactTable from "../Table/ContactTable";
 import ContactDataGrid from "../DataGrid/ContactDataGrid";
 import { BeautifulTheme } from "../../Theme/BeautifulTheme";
-import { useMediaQuery } from "@mui/material";
+import { IconButton, useMediaQuery } from "@mui/material";
+import { Menu } from "@mui/icons-material";
 
 type ThemeWidth = Theme
   & { drawerWidth: number | string }
@@ -42,12 +43,23 @@ const styles = (theme: ThemeWidth, responsiveDrawerWidth: number | string) => {
     },
     content: {
       padding: 3,
-      minWidth: responsiveDrawerWidth,
-      marginLeft: 0
+      marginLeft: 0,
+      maxWidth: 720,
+      minWdth: 375,
+      transition: theme.transitions.create('margin',{
+        easing: theme.transitions.easing.easeOut,
+        duration : transitionDuration
+      })
     },
     contentShift: {
-      minWidth: responsiveDrawerWidth,
-      marginLeft: responsiveDrawerWidth
+      marginLeft: responsiveDrawerWidth,
+      transition: theme.transitions.create('margin',{
+        easing: theme.transitions.easing.easeOut,
+        duration : transitionDuration
+      })
+    },
+    menuButton: {
+      marginRight: 2
     }
   }
 }
@@ -69,6 +81,9 @@ export default function NavDrawer() {
         <div>
           <AppBar position="fixed" sx={styles(theme,responsiveDrawerWidth).appBar}>
             <Toolbar>
+              <IconButton color='inherit' edge='start' onClick={()=>setOpen(!open)} sx={{...styles(theme,responsiveDrawerWidth).menuButton, display: greatedThan375 ? "none" :""}}>
+                <Menu/>
+              </IconButton>
               <Typography variant="h6" noWrap>
                 Expert Material-UI Styling
               </Typography>
@@ -98,7 +113,7 @@ export default function NavDrawer() {
             </div>
           </Drawer>
           <main
-            style={{ ...styles(theme,responsiveDrawerWidth).content, ...styles(theme,responsiveDrawerWidth).contentShift }}
+            style={{ ...styles(theme,responsiveDrawerWidth).content, ...(open ? styles(theme,responsiveDrawerWidth).contentShift : {}) }}
           >
             <Toolbar />
             <ThemeProvider theme={BeautifulTheme}>
